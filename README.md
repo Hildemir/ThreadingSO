@@ -1,15 +1,15 @@
 # Java Web Crawler
 
-### About the project
+### 📝 About the project
 - This project was was the result of my studies about process synchronization (threads).
 - Based on a Producer–consumer problem where a shared buffer needed to be protected from concurrent processes.
 - The final result was a web crawler that download all images from a list of websites which all processes are synchronized by a binary semaphore.
 ---
-### Technologies
+### 👨‍💻 Technologies
 - [Java](https://www.oracle.com/technetwork/pt/java/javase/downloads/index.html)
 - [Jsoup](https://jsoup.org/)
 ---
-### How to run this project
+### ▶ How to run this project
 - Download this project
 
 ```bash 
@@ -23,4 +23,4 @@ $ git clone https://github.com/Hildemir/ThreadingSO
 3.  Add Jsoup Library to your IDE
 4. Run!
 ---
-Developed by Hildemir Regis :P
+Developed by Hildemir Regis 😜
