@@ -7,75 +7,56 @@ import java.io.IOException;
 
 public class MythreadUrlSeeker implements Runnable {
 
+    // [Attributes]
         private String name;
         private Thread t;
         private String url;
         private int i;
+        private int j;
         private Buffer buffer;
+    // [Attributes]
 
-        MythreadUrlSeeker(String threadName, String url, int i, Buffer buffer){
+    // [Constructor]
+        MythreadUrlSeeker(String threadName, String url, int i, int j, Buffer buffer){
             this.name = threadName;
             this.url = url;
             this.t = new Thread(this, name);
             this.i = i;
+            this.j = j;
             this.buffer = buffer;
             System.out.println("New: " + t);
             t.start();
-
         }
+    // [Constructor]
 
+    // [Thread Body]
         public void run() {
+            // [Connect With URL]
             try {
                 Document document = Jsoup.connect(url).get();
+                System.out.println("Fetching " + url + " ...");
+                // [Returns All Images]
                 Elements images = document.getElementsByTag("img");     //("img[src~=(?i)\\.(png|jpe?g|gif)]");
-
+                System.out.println("Media: (" + images.size() + ")");
                 for (Element e: images) {
                     if(isLink(e.attr("src"))){
-                        buffer.set(i,e.attr("src"));
-                       // buffer.getList().add((e.attr("src")));     //image url added to the buffer
-//                        if(buffer.getList().size()<0){
-//                            System.out.println("nao adicionou");
-//                        } else{
-//                            System.out.println("adicionou");
-                            System.out.println(buffer.getList().size());
-//                            System.out.println(buffer.getList().getFirst());
-//                            System.out.println(buffer.getList().getLast());
-//                        }
+                        // [ Create Thread that Add Each Image in The List]
+                        new MyThreadImageProducer("Adding Image " + i + "." + j , e.attr("src"), i, j, buffer);
+                        j++;
                     }
                 }
-
                 Thread.sleep(1000);
-
-//                if(buffer.getList().isEmpty()){
-//                    System.out.println("vazia otaru");
-//                } else {
-//                    for (String link: buffer.getList()) {
-//                        System.out.println(link);
-//                    }
-//                }
-
             }catch (InterruptedException | IOException e) {
-                System.out.println(name + "Interrupted");
+                System.out.println(name + " Interrupted.");
             }
-            System.out.println(name + " exiting.");
-//            if(i >4){
-//                if(buffer.getList().isEmpty()){
-//                    System.out.println("vazia otaru");
-//                } else {
-//                    for (String link: buffer.getList()) {
-//                        System.out.println(link);
-//                    }
-//                }
-//            }
+            System.out.println(name + " Finished.");
         }
+    // [Thread Body]
 
-        public boolean isLink(String str){
-            if(str.startsWith("https://")){
-                return true;
-            }else {
-                return false;
-            }
+    // [Validate URL]
+        public boolean isLink(String str) {
+            return str.startsWith("https://");      // [If Starts With "https://" Return True, Otherwise, Return False]
         }
-
+    // [Validate URL]
 
 }
