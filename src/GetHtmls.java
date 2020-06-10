@@ -1,6 +1,5 @@
-
 import java.io.*;
-import java.util.*;
+
 public class GetHtmls extends Thread{
     // [Attributes]
     private Buffer buffer;

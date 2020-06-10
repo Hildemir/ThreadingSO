@@ -4,7 +4,7 @@ public class Main {
 
         Buffer  sharedBuffer = new Buffer();
         GetHtmls getHtmls = new GetHtmls(sharedBuffer, i, j);
-        MyThreadDownloader threadDownloader = new MyThreadDownloader(j, sharedBuffer);
+        MyThreadDownloader threadDownloader = new MyThreadDownloader(sharedBuffer);
 
         //[!Start Threads]
         getHtmls.start();

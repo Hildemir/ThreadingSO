@@ -41,7 +41,7 @@ public class MythreadUrlSeeker implements Runnable {
                 for (Element e: images) {
                     if(isLink(e.attr("src"))){
                         // [ Create Thread that Add Each Image in The List]
-                        new MyThreadImageProducer("Adding Image " + i + "." + j , e.attr("src"), i, j, buffer);
+                        new MyThreadImageProducer("Adding Image " + i + "." + j , e.attr("src"), j, buffer);
                         j++;
                     }
                 }

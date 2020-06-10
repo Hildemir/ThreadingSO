@@ -9,16 +9,14 @@ public class ImageDownloader extends Thread {
     private int i;
     private String name;
     private Thread t;
-    private Buffer buffer;
     private String url;
     // [Attributes]
 
     // [Constructor]
-    public ImageDownloader(String threadName, int i, Buffer buffer, String url) {
+    public ImageDownloader(String threadName, int i, String url) {
         this.name = threadName;
         this.i = i;
         this.t = new Thread(this, name);
-        this.buffer = buffer;
         this.url = url;
         t.start();
         System.out.println("New: " + t);
